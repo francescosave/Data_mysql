@@ -28,6 +28,7 @@ import java.awt.Color;
 import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
 import javax.swing.JScrollPane;
+import javax.swing.JCheckBox;
 
 public class MAIN extends JFrame {
 
@@ -82,6 +83,10 @@ public class MAIN extends JFrame {
 	private JButton btnDeleteRecord_2;
 	private JButton btnDeleteRecord_3;
 	private JButton btnDeleteRecord_4;
+	private JButton button_16;
+	private JButton button_17;
+	private JButton button_18;
+	private JCheckBox chckbxEseguiAutomaticamente;
 
 	/**
 	 * Launch the application.
@@ -104,7 +109,7 @@ public class MAIN extends JFrame {
 	 */
 	public MAIN() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1325, 723);
+		setBounds(100, 100, 1300, 768);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -118,7 +123,7 @@ public class MAIN extends JFrame {
 		toolBar.add(lblDriver);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 27, 1289, 646);
+		panel.setBounds(0, 0, 1265, 646);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -142,7 +147,7 @@ public class MAIN extends JFrame {
 		textAreaSQL.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
 		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(21, 262, 405, 194);
+		scrollPane_1.setBounds(444, 512, 803, 102);
 		panel.add(scrollPane_1);
 		
 		textAreaLOG = new JTextArea();
@@ -152,7 +157,9 @@ public class MAIN extends JFrame {
 		btnNewButton_1 = new JButton("DROP TABLE");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			
 				textAreaSQL.setText("DROP TABLE registration;");
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
 		btnNewButton_1.setBounds(558, 21, 98, 30);
@@ -168,6 +175,7 @@ public class MAIN extends JFrame {
 		                   " last VARCHAR(255), \n" + 
 		                   " age INTEGER, \n" + 
 		                   " PRIMARY KEY ( id ))\n"); 
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
 		btnCreateTable.setBounds(659, 21, 93, 30);
@@ -177,11 +185,11 @@ public class MAIN extends JFrame {
 		btnInsertRecord.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				textAreaSQL.setText("INSERT INTO TEST.REGISTRATION\n" +  
+				textAreaSQL.setText("INSERT INTO REGISTRATION\n" +  
 				"(ID,first,last,age)\n" + 
 				"VALUES\n" + 
 				"(1,'RICCI','FRANCESCO','15');\n");
-
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 				
 				
 						
@@ -194,6 +202,7 @@ public class MAIN extends JFrame {
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textAreaSQL.setText("DROP TABLE ARTICOLI;");
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
 		button_2.setBounds(558, 64, 98, 30);
@@ -213,6 +222,7 @@ public class MAIN extends JFrame {
 		                   "ALQIVA VARCHAR(2)NOT NULL, \n" +
 		                   "REPARTO INTEGER NOT NULL, \n" +
 						   "PRIMARY KEY ( CODICE ))\n"); 
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
 		btnArticoli.setBounds(659, 64, 93, 30);
@@ -221,53 +231,107 @@ public class MAIN extends JFrame {
 		button_4 = new JButton("INSERT RECORD");
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				textAreaSQL.setText("INSERT INTO TEST.ARTICOLI\n" +  
+				//Inserisce articolo 
+				textAreaSQL.setText("INSERT INTO ARTICOLI\n" +  
 						"(CODICE,DESCRIZIONE,DES_BREVE,CATEGORIA,PREZZO,TIPO,COLORE,ALQIVA,REPARTO)\n" + 
 						"VALUES\n" + 
 						"('CAFFE','CAFFE','CAFFE',1,1,'STD',0,'22',1);\n");
-				
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
 		button_4.setBounds(867, 64, 116, 30);
 		panel.add(button_4);
 		
 		button_5 = new JButton("DROP TABLE");
-		button_5.setEnabled(false);
+		button_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				textAreaSQL.setText("DROP TABLE CATEGORIE;");
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+			}
+		});
 		button_5.setBounds(558, 107, 98, 30);
 		panel.add(button_5);
 		
 		button_6 = new JButton("CREATE TABLE");
-		button_6.setEnabled(false);
+		button_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Crea la tabella delle categorie
+				textAreaSQL.setText("CREATE TABLE CATEGORIE \n" + 
+		                   "(ID_CAT INTEGER NOT NULL, \n" +
+		                   "DES_CAT VARCHAR(15) NOT NULL, \n" + 
+		                   "PRIMARY KEY(ID_CAT))\n"); 
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+			}
+		});
 		button_6.setBounds(659, 107, 93, 30);
 		panel.add(button_6);
 		
 		button_7 = new JButton("INSERT RECORD");
-		button_7.setEnabled(false);
+		button_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Inserisce categoria 
+				textAreaSQL.setText("INSERT INTO CATEGORIE\n" +  
+						"(ID_CAT,DES_CAT)\n" + 
+						"VALUES\n" + 
+						"(1,'CAFFETTERIA');\n");	
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+			}
+		});
 		button_7.setBounds(867, 107, 116, 30);
 		panel.add(button_7);
 		
 		button_8 = new JButton("DROP TABLE");
-		button_8.setEnabled(false);
+		button_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textAreaSQL.setText("DROP TABLE TIPI_ARTICOLI;");
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+			}
+		});
 		button_8.setBounds(558, 150, 98, 30);
 		panel.add(button_8);
 		
 		button_9 = new JButton("CREATE TABLE");
-		button_9.setEnabled(false);
+		button_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textAreaSQL.setText("CREATE TABLE TIPI_ARTICOLI \n" + 
+		                   "(ID_TIPART VARCHAR(3) NOT NULL, \n" +
+		                   "DES_TIPART VARCHAR(15) NOT NULL, \n" + 
+		                   "PRIMARY KEY(ID_TIPART))\n"); 
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+				
+			}
+		});
 		button_9.setBounds(659, 150, 93, 30);
 		panel.add(button_9);
 		
 		button_10 = new JButton("INSERT RECORD");
+		button_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		button_10.setEnabled(false);
 		button_10.setBounds(867, 150, 116, 30);
 		panel.add(button_10);
 		
 		button_11 = new JButton("DROP TABLE");
-		button_11.setEnabled(false);
+		button_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textAreaSQL.setText("DROP TABLE ALIQUOTE_IVA;");
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+			}
+		});
 		button_11.setBounds(558, 193, 98, 30);
 		panel.add(button_11);
 		
 		button_12 = new JButton("CREATE TABLE");
-		button_12.setEnabled(false);
+		button_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textAreaSQL.setText("CREATE TABLE ALIQUOTE_IVA \n" + 
+		                   "(ID_ALQIVA VARCHAR(2) NOT NULL, \n" +
+		                   "DES_ALQIVA VARCHAR(15) NOT NULL, \n" + 
+		                   "PRIMARY KEY(ID_ALQIVA))\n"); 
+			}
+		});
 		button_12.setBounds(659, 193, 93, 30);
 		panel.add(button_12);
 		
@@ -290,13 +354,14 @@ public class MAIN extends JFrame {
 				//OBBLIGATORIO NONE_OLD NOME_NEW.ACCETTA ANCHE STESSO NOME
 				//PROBABILMENTE IN ORDINE DI PRESTAZIONI E PIU VELOCE MODIFY CHE NON CREA ALTRA COLONNA
 				textAreaSQL.setText(" ALTER TABLE ARTICOLI MODIFY  PREZZO DECIMAL(5,2) NOT NULL;");
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
 		btnNewButton_2.setBounds(755, 66, 89, 27);
 		panel.add(btnNewButton_2);
 		
 		tFdriver = new JTextField();
-		tFdriver.setBounds(21, 507, 304, 30);
+		tFdriver.setBounds(21, 514, 304, 30);
 		panel.add(tFdriver);
 		tFdriver.setText("com.mysql.jdbc.Driver");
 		tFdriver.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -335,9 +400,9 @@ public class MAIN extends JFrame {
 		tFport.setColumns(10);
 		
 		tFdatabase = new JTextField();
-		tFdatabase.setBounds(194, 547, 131, 30);
+		tFdatabase.setBounds(188, 547, 135, 30);
 		panel.add(tFdatabase);
-		tFdatabase.setText("test");
+		tFdatabase.setText("retasys");
 		tFdatabase.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tFdatabase.addFocusListener(new FocusAdapter() {
 			@Override
@@ -355,7 +420,7 @@ public class MAIN extends JFrame {
 		tFuser.setColumns(10);
 		
 		tFconnectionString = new JTextField();
-		tFconnectionString.setBounds(21, 588, 304, 35);
+		tFconnectionString.setBounds(21, 579, 304, 35);
 		panel.add(tFconnectionString);
 		tFconnectionString.addFocusListener(new FocusAdapter() {
 			@Override
@@ -368,12 +433,12 @@ public class MAIN extends JFrame {
 		tFconnectionString.setText("jdbc:mysql://"+tFserver.getText()+":"+tFport.getText()+"/"+tFdatabase.getText()+"?user="+tFuser.getText());
 		
 		btnNewButton = new JButton("TEST");
-		btnNewButton.setBounds(335, 507, 81, 30);
+		btnNewButton.setBounds(334, 513, 81, 30);
 		panel.add(btnNewButton);
 		btnNewButton.setForeground(Color.BLACK);
 		
 		button = new JButton("TEST");
-		button.setBounds(335, 592, 81, 30);
+		button.setBounds(335, 583, 81, 30);
 		panel.add(button);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -393,26 +458,49 @@ public class MAIN extends JFrame {
 		button.setForeground(Color.BLACK);
 		
 		btnUpdateRecord = new JButton("UPDATE RECORD");
+		btnUpdateRecord.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnUpdateRecord.setEnabled(false);
 		btnUpdateRecord.setBounds(993, 21, 116, 30);
 		panel.add(btnUpdateRecord);
 		
 		btnUpdateRecord_1 = new JButton("UPDATE RECORD");
-		btnUpdateRecord_1.setEnabled(false);
+		btnUpdateRecord_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				textAreaSQL.setText("UPDATE articoli SET descrizione = 'Caffe Corretto' WHERE Codice = 'Caffe';");
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+			}
+		});
 		btnUpdateRecord_1.setBounds(993, 64, 116, 30);
 		panel.add(btnUpdateRecord_1);
 		
 		btnUpdateRecord_2 = new JButton("UPDATE RECORD");
-		btnUpdateRecord_2.setEnabled(false);
+		btnUpdateRecord_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				textAreaSQL.setText("UPDATE categorie SET des_cat = 'BEV.ANALC' WHERE ID_CAT = 2;");
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+			}
+		});
 		btnUpdateRecord_2.setBounds(993, 107, 116, 30);
 		panel.add(btnUpdateRecord_2);
 		
 		btnUpdateRecord_3 = new JButton("UPDATE RECORD");
+		btnUpdateRecord_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnUpdateRecord_3.setEnabled(false);
 		btnUpdateRecord_3.setBounds(993, 150, 116, 30);
 		panel.add(btnUpdateRecord_3);
 		
 		btnUpdateRecord_4 = new JButton("UPDATE RECORD");
+		btnUpdateRecord_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnUpdateRecord_4.setEnabled(false);
 		btnUpdateRecord_4.setBounds(993, 193, 116, 30);
 		panel.add(btnUpdateRecord_4);
@@ -423,16 +511,30 @@ public class MAIN extends JFrame {
 		panel.add(btnDeleteRecord);
 		
 		btnDeleteRecord_1 = new JButton("DELETE RECORD");
-		btnDeleteRecord_1.setEnabled(false);
+		btnDeleteRecord_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				textAreaSQL.setText("DELETE FROM ARTICOLI;");
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+			}
+		});
 		btnDeleteRecord_1.setBounds(1121, 64, 116, 30);
 		panel.add(btnDeleteRecord_1);
 		
 		btnDeleteRecord_2 = new JButton("DELETE RECORD");
-		btnDeleteRecord_2.setEnabled(false);
-		btnDeleteRecord_2.setBounds(1121, 107, 116, 30);
+		btnDeleteRecord_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textAreaSQL.setText("DELETE FROM CATEGORIE;");
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+			}
+		});
+		btnDeleteRecord_2.setBounds(1119, 107, 116, 30);
 		panel.add(btnDeleteRecord_2);
 		
 		btnDeleteRecord_3 = new JButton("DELETE RECORD");
+		btnDeleteRecord_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnDeleteRecord_3.setEnabled(false);
 		btnDeleteRecord_3.setBounds(1121, 150, 116, 30);
 		panel.add(btnDeleteRecord_3);
@@ -441,6 +543,90 @@ public class MAIN extends JFrame {
 		btnDeleteRecord_4.setEnabled(false);
 		btnDeleteRecord_4.setBounds(1121, 193, 116, 30);
 		panel.add(btnDeleteRecord_4);
+		
+		JButton button_3 = new JButton("DROP TABLE");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textAreaSQL.setText("DROP TABLE MOVIMENTI;");
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+				
+			}
+		});
+		button_3.setBounds(558, 234, 98, 30);
+		panel.add(button_3);
+		
+		JButton button_14 = new JButton("DROP TABLE");
+		button_14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textAreaSQL.setText("DROP TABLE MOVIMENTI_RIGHE;");
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+			}
+		});
+		button_14.setBounds(558, 275, 98, 30);
+		panel.add(button_14);
+		
+		JButton button_15 = new JButton("DROP TABLE");
+		button_15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textAreaSQL.setText("DROP TABLE CLIENTI;");
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+			}
+		});
+		button_15.setBounds(558, 316, 98, 30);
+		panel.add(button_15);
+		
+		button_16 = new JButton("CREATE TABLE");
+		button_16.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				textAreaSQL.setText("CREATE TABLE MOVIMENTI \n" + 
+		                   "(ID_MOV INTEGER NOT NULL, \n" +
+		                   "TIPO_MOV VARCHAR(4) NOT NULL, \n" + 
+		                   "NUMERO_MOV INTEGER, \n" + 
+		                   "DATA_MOV INTEGER NOT NULL, \n" +
+		                   "ID_CLIENTE INTEGER NOT NULL, \n" +
+						   "PRIMARY KEY ( ID_MOV ))\n"); 
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+				
+			}
+		});
+		button_16.setBounds(659, 234, 93, 30);
+		panel.add(button_16);
+		
+		button_17 = new JButton("CREATE TABLE");
+		button_17.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textAreaSQL.setText("CREATE TABLE MOVIMENTI_RIGHE \n" + 
+		                   "(ID_RIG INTEGER NOT NULL, \n" +
+		                   "ID_MOV INTEGER NOT NULL, \n" + 
+		                   "QTA INTEGER, \n" + 
+		                   "ID_ART_MOV INTEGER NOT NULL, \n" +
+		                   "NOTE VARCHAR(50), \n" +
+						   "PRIMARY KEY ( ID_MOV ))\n"); 
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+			}
+		});
+		button_17.setBounds(659, 275, 93, 30);
+		panel.add(button_17);
+		
+		button_18 = new JButton("CREATE TABLE");
+		button_18.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textAreaSQL.setText("CREATE TABLE CLIENTI \n" + 
+		                   "(ID_CLI INTEGER NOT NULL, \n" +
+		                   "RAGSOC_CLI VARCHAR(30) NOT NULL, \n" + 
+		                   "PIVA VARCHAR(11), \n" +
+						   "PRIMARY KEY ( ID_CLI ))\n"); 
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+			}
+		});
+		button_18.setBounds(659, 316, 93, 30);
+		panel.add(button_18);
+		
+		chckbxEseguiAutomaticamente = new JCheckBox("Esegui Automaticamente");
+		chckbxEseguiAutomaticamente.setSelected(true);
+		chckbxEseguiAutomaticamente.setBounds(268, 225, 158, 23);
+		panel.add(chckbxEseguiAutomaticamente);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -477,7 +663,7 @@ public class MAIN extends JFrame {
 		      
 		      String sql = textAreaSQL.getText();
 		      queryRes = stmt.executeUpdate(sql);
-		      JOptionPane.showMessageDialog(null,"succ " + queryRes );
+		      //JOptionPane.showMessageDialog(null,"succ " + queryRes );
 		     
 		     
 		      
@@ -487,7 +673,7 @@ public class MAIN extends JFrame {
 		   }catch(SQLException se){
 		      //Handle errors for JDBC
 		      se.printStackTrace();
-		      JOptionPane.showMessageDialog(null, Integer.toString(queryRes));
+		      //JOptionPane.showMessageDialog(null, Integer.toString(queryRes));
 		      textAreaLOG.setText(textAreaLOG.getText()+ "\n"+ se.getErrorCode() + "\n"+  se.getMessage());
 		   }catch(Exception e){
 		      //Handle errors for Class.forName
