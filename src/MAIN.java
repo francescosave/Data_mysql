@@ -330,6 +330,7 @@ public class MAIN extends JFrame {
 		                   "(ID_ALQIVA VARCHAR(2) NOT NULL, \n" +
 		                   "DES_ALQIVA VARCHAR(15) NOT NULL, \n" + 
 		                   "PRIMARY KEY(ID_ALQIVA))\n"); 
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
 		button_12.setBounds(659, 193, 93, 30);
