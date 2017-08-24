@@ -56,9 +56,6 @@ public class MAIN extends JFrame {
 	private JButton button_1;
 	private JTextArea textAreaSQL;
 	private JTextArea textAreaLOG;
-	private JButton btnNewButton_1;
-	private JButton btnCreateTable;
-	private JButton btnInsertRecord;
 	private JScrollPane scrollPane;
 	private JScrollPane scrollPane_1;
 	private JButton button_2;
@@ -73,12 +70,10 @@ public class MAIN extends JFrame {
 	private JButton button_11;
 	private JButton button_12;
 	private JButton button_13;
-	private JButton btnUpdateRecord;
 	private JButton btnUpdateRecord_1;
 	private JButton btnUpdateRecord_2;
 	private JButton btnUpdateRecord_3;
 	private JButton btnUpdateRecord_4;
-	private JButton btnDeleteRecord;
 	private JButton btnDeleteRecord_1;
 	private JButton btnDeleteRecord_2;
 	private JButton btnDeleteRecord_3;
@@ -154,50 +149,6 @@ public class MAIN extends JFrame {
 		textAreaLOG = new JTextArea();
 		scrollPane_1.setViewportView(textAreaLOG);
 		textAreaLOG.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		
-		btnNewButton_1 = new JButton("DROP TABLE");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			
-				textAreaSQL.setText("DROP TABLE registration;");
-				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
-			}
-		});
-		btnNewButton_1.setBounds(558, 21, 98, 30);
-		panel.add(btnNewButton_1);
-		
-		btnCreateTable = new JButton("CREATE TABLE");
-		btnCreateTable.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				 
-				textAreaSQL.setText("CREATE TABLE REGISTRATION \n" + 
-		                   "(id INTEGER not NULL, \n" +
-		                   " first VARCHAR(255), \n" + 
-		                   " last VARCHAR(255), \n" + 
-		                   " age INTEGER, \n" + 
-		                   " PRIMARY KEY ( id ))\n"); 
-				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
-			}
-		});
-		btnCreateTable.setBounds(659, 21, 93, 30);
-		panel.add(btnCreateTable);
-		
-		btnInsertRecord = new JButton("INSERT RECORD");
-		btnInsertRecord.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				textAreaSQL.setText("INSERT INTO REGISTRATION\n" +  
-				"(ID,first,last,age)\n" + 
-				"VALUES\n" + 
-				"(1,'RICCI','FRANCESCO','15');\n");
-				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
-				
-				
-						
-			}
-		});
-		btnInsertRecord.setBounds(867, 21, 116, 30);
-		panel.add(btnInsertRecord);
 		
 		button_2 = new JButton("DROP TABLE");
 		button_2.addActionListener(new ActionListener() {
@@ -360,9 +311,9 @@ public class MAIN extends JFrame {
 		button_13.setBounds(867, 193, 116, 30);
 		panel.add(button_13);
 		
-		JLabel lblNewLabel = new JLabel("REGISTATION");
+		JLabel lblNewLabel = new JLabel("ARTICOLI");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel.setBounds(436, 21, 173, 32);
+		lblNewLabel.setBounds(440, 62, 108, 32);
 		panel.add(lblNewLabel);
 		
 		JButton btnNewButton_2 = new JButton("ALTER TAB.");
@@ -477,15 +428,6 @@ public class MAIN extends JFrame {
 		});
 		button.setForeground(Color.BLACK);
 		
-		btnUpdateRecord = new JButton("UPDATE RECORD");
-		btnUpdateRecord.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnUpdateRecord.setEnabled(false);
-		btnUpdateRecord.setBounds(993, 21, 116, 30);
-		panel.add(btnUpdateRecord);
-		
 		btnUpdateRecord_1 = new JButton("UPDATE RECORD");
 		btnUpdateRecord_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -524,11 +466,6 @@ public class MAIN extends JFrame {
 		btnUpdateRecord_4.setEnabled(false);
 		btnUpdateRecord_4.setBounds(993, 193, 116, 30);
 		panel.add(btnUpdateRecord_4);
-		
-		btnDeleteRecord = new JButton("DELETE RECORD");
-		btnDeleteRecord.setEnabled(false);
-		btnDeleteRecord.setBounds(1121, 21, 116, 30);
-		panel.add(btnDeleteRecord);
 		
 		btnDeleteRecord_1 = new JButton("DELETE RECORD");
 		btnDeleteRecord_1.addActionListener(new ActionListener() {
