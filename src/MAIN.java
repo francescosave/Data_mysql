@@ -108,6 +108,7 @@ public class MAIN extends JFrame {
 	 * Create the frame.
 	 */
 	public MAIN() {
+		setTitle("Data_mysql tool");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1300, 768);
 		contentPane = new JPanel();
@@ -208,7 +209,8 @@ public class MAIN extends JFrame {
 		button_2.setBounds(558, 64, 98, 30);
 		panel.add(button_2);
 		
-		btnArticoli = new JButton("ARTICOLI");
+		btnArticoli = new JButton("CREATE");
+		btnArticoli.setToolTipText("ARTICOLI");
 		btnArticoli.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textAreaSQL.setText("CREATE TABLE ARTICOLI \n" + 
@@ -221,7 +223,7 @@ public class MAIN extends JFrame {
 		                   "COLORE INTEGER NOT NULL, \n" +
 		                   "ALQIVA VARCHAR(2)NOT NULL, \n" +
 		                   "REPARTO INTEGER NOT NULL, \n" +
-						   "PRIMARY KEY ( CODICE ))\n"); 
+						   "PRIMARY KEY ( CODICE ));\n"); 
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
@@ -253,13 +255,14 @@ public class MAIN extends JFrame {
 		panel.add(button_5);
 		
 		button_6 = new JButton("CREATE TABLE");
+		button_6.setToolTipText("CATEGORIE");
 		button_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Crea la tabella delle categorie
 				textAreaSQL.setText("CREATE TABLE CATEGORIE \n" + 
 		                   "(ID_CAT INTEGER NOT NULL, \n" +
 		                   "DES_CAT VARCHAR(15) NOT NULL, \n" + 
-		                   "PRIMARY KEY(ID_CAT))\n"); 
+		                   "PRIMARY KEY(ID_CAT));\n"); 
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
@@ -283,7 +286,7 @@ public class MAIN extends JFrame {
 		button_8 = new JButton("DROP TABLE");
 		button_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textAreaSQL.setText("DROP TABLE TIPI_ARTICOLI;");
+				textAreaSQL.setText("DROP TABLE TIPI_ARTICOLO;");
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
@@ -291,12 +294,13 @@ public class MAIN extends JFrame {
 		panel.add(button_8);
 		
 		button_9 = new JButton("CREATE TABLE");
+		button_9.setToolTipText("TIPI_ARTICOLI");
 		button_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textAreaSQL.setText("CREATE TABLE TIPI_ARTICOLI \n" + 
+				textAreaSQL.setText("CREATE TABLE TIPI_ARTICOLO \n" + 
 		                   "(ID_TIPART VARCHAR(3) NOT NULL, \n" +
 		                   "DES_TIPART VARCHAR(15) NOT NULL, \n" + 
-		                   "PRIMARY KEY(ID_TIPART))\n"); 
+		                   "PRIMARY KEY(ID_TIPART));\n"); 
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 				
 			}
@@ -307,9 +311,13 @@ public class MAIN extends JFrame {
 		button_10 = new JButton("INSERT RECORD");
 		button_10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textAreaSQL.setText("INSERT INTO TIPI_ARTICOLO\n" +  
+						"(ID_TIPART,DES_TIPART)\n" + 
+						"VALUES\n" + 
+						"('STD','STANDART');\n");
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		button_10.setEnabled(false);
 		button_10.setBounds(867, 150, 116, 30);
 		panel.add(button_10);
 		
@@ -329,7 +337,7 @@ public class MAIN extends JFrame {
 				textAreaSQL.setText("CREATE TABLE ALIQUOTE_IVA \n" + 
 		                   "(ID_ALQIVA VARCHAR(2) NOT NULL, \n" +
 		                   "DES_ALQIVA VARCHAR(15) NOT NULL, \n" + 
-		                   "PRIMARY KEY(ID_ALQIVA))\n"); 
+		                   "PRIMARY KEY(ID_ALQIVA));\n"); 
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
@@ -337,7 +345,17 @@ public class MAIN extends JFrame {
 		panel.add(button_12);
 		
 		button_13 = new JButton("INSERT RECORD");
-		button_13.setEnabled(false);
+		button_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				textAreaSQL.setText("INSERT INTO ALIQUOTE_IVA\n" +  
+						"(ID_ALQIVA,DES_ALQIVA)\n" + 
+						"VALUES\n" + 
+						"('22','IVA 22%');\n");	
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+			}
+		});
 		button_13.setBounds(867, 193, 116, 30);
 		panel.add(button_13);
 		
@@ -534,14 +552,20 @@ public class MAIN extends JFrame {
 		btnDeleteRecord_3 = new JButton("DELETE RECORD");
 		btnDeleteRecord_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textAreaSQL.setText("DELETE FROM TIPI_ARTICOLO;");
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		btnDeleteRecord_3.setEnabled(false);
 		btnDeleteRecord_3.setBounds(1121, 150, 116, 30);
 		panel.add(btnDeleteRecord_3);
 		
 		btnDeleteRecord_4 = new JButton("DELETE RECORD");
-		btnDeleteRecord_4.setEnabled(false);
+		btnDeleteRecord_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textAreaSQL.setText("DELETE FROM ALIQUOTE_IVA;");
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+			}
+		});
 		btnDeleteRecord_4.setBounds(1121, 193, 116, 30);
 		panel.add(btnDeleteRecord_4);
 		
@@ -586,7 +610,7 @@ public class MAIN extends JFrame {
 		                   "NUMERO_MOV INTEGER, \n" + 
 		                   "DATA_MOV INTEGER NOT NULL, \n" +
 		                   "ID_CLIENTE INTEGER NOT NULL, \n" +
-						   "PRIMARY KEY ( ID_MOV ))\n"); 
+						   "PRIMARY KEY ( ID_MOV ));\n"); 
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 				
 			}
@@ -603,7 +627,7 @@ public class MAIN extends JFrame {
 		                   "QTA INTEGER, \n" + 
 		                   "ID_ART_MOV INTEGER NOT NULL, \n" +
 		                   "NOTE VARCHAR(50), \n" +
-						   "PRIMARY KEY ( ID_MOV ))\n"); 
+						   "PRIMARY KEY ( ID_MOV ));\n"); 
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
@@ -617,7 +641,7 @@ public class MAIN extends JFrame {
 		                   "(ID_CLI INTEGER NOT NULL, \n" +
 		                   "RAGSOC_CLI VARCHAR(30) NOT NULL, \n" + 
 		                   "PIVA VARCHAR(11), \n" +
-						   "PRIMARY KEY ( ID_CLI ))\n"); 
+						   "PRIMARY KEY ( ID_CLI ));\n"); 
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
@@ -628,6 +652,14 @@ public class MAIN extends JFrame {
 		chckbxEseguiAutomaticamente.setSelected(true);
 		chckbxEseguiAutomaticamente.setBounds(268, 225, 158, 23);
 		panel.add(chckbxEseguiAutomaticamente);
+		
+		JLabel lblNewLabel_1 = new JLabel("ATTENZIONE QUESTO TOOL MODIFICA IRRIMEDIALMENTE IL DATABASE.ESGUIRE UN BACKUP PRIMA DI ESEGUIRE QUALSIASI OPERAZIONE");
+		lblNewLabel_1.setForeground(Color.YELLOW);
+		lblNewLabel_1.setOpaque(true);
+		lblNewLabel_1.setBackground(Color.RED);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_1.setBounds(10, 666, 1233, 30);
+		contentPane.add(lblNewLabel_1);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
