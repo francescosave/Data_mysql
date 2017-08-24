@@ -82,6 +82,7 @@ public class MAIN extends JFrame {
 	private JButton button_17;
 	private JButton button_18;
 	private JCheckBox chckbxEseguiAutomaticamente;
+	private JButton btnNewButton_1;
 
 	/**
 	 * Launch the application.
@@ -324,7 +325,7 @@ public class MAIN extends JFrame {
 				// PAROLA CHANGE PER CAMBIARE IL NOME E VOLENDO ANCHE TIPO E ORDINE DI GRANDEZZA
 				//OBBLIGATORIO NONE_OLD NOME_NEW.ACCETTA ANCHE STESSO NOME
 				//PROBABILMENTE IN ORDINE DI PRESTAZIONI E PIU VELOCE MODIFY CHE NON CREA ALTRA COLONNA
-				textAreaSQL.setText(" ALTER TABLE ARTICOLI MODIFY  PREZZO DECIMAL(5,2) NOT NULL;");
+				textAreaSQL.setText("ALTER TABLE ARTICOLI MODIFY  PREZZO DECIMAL(5,2) NOT NULL;");
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
@@ -414,7 +415,8 @@ public class MAIN extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			
-				if (ConnettiDb()=="ConnettiDb_OK"){
+				MysqlUtil mu = new MysqlUtil();
+				if (mu.ConnettiDb()=="ConnettiDb_OK"){
 					button.setText("test OK");
 					button.setForeground(Color.green);
 				}else{
@@ -594,6 +596,21 @@ public class MAIN extends JFrame {
 		chckbxEseguiAutomaticamente.setBounds(268, 225, 158, 23);
 		panel.add(chckbxEseguiAutomaticamente);
 		
+		btnNewButton_1 = new JButton("New button");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				FileSql fs= new FileSql();
+				textAreaSQL.setText(fs.getFile());
+				
+				LogApp la = new LogApp();
+				la.PrintLog("11","JButton.actionPerformed");
+				
+			}
+		});
+		btnNewButton_1.setBounds(31, 228, 89, 23);
+		panel.add(btnNewButton_1);
+		
 		JLabel lblNewLabel_1 = new JLabel("ATTENZIONE QUESTO TOOL MODIFICA IRRIMEDIALMENTE IL DATABASE.ESGUIRE UN BACKUP PRIMA DI ESEGUIRE QUALSIASI OPERAZIONE");
 		lblNewLabel_1.setForeground(Color.YELLOW);
 		lblNewLabel_1.setOpaque(true);
@@ -604,7 +621,10 @@ public class MAIN extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				if (VerificaDriver()=="VerificaDriver_OK"){
+				
+				MysqlUtil mu = new MysqlUtil();
+				
+				if (mu.VerificaDriver()=="VerificaDriver_OK"){
 					btnNewButton.setText("test OK");
 					btnNewButton.setForeground(Color.GREEN);
 				}else{
@@ -622,6 +642,10 @@ public class MAIN extends JFrame {
 		Connection conn = null;
 		   Statement stmt = null;
 		   int queryRes=0;
+		   
+		   LogApp la = new LogApp();
+			//la.PrintLog("11","JButton.actionPerformed");
+		   
 		   try{
 		      //STEP 2: Register JDBC driver
 		      Class.forName(tFdriver.getText());
@@ -643,15 +667,21 @@ public class MAIN extends JFrame {
 		      
 		      System.out.println("Created table in given database...");
 		      textAreaLOG.setText("comando eseguito con successo!!!\n");
+		      la.PrintLog("QueryOK", textAreaSQL.getText().substring(0, 15)+"...");
+		     
+		      
 		      
 		   }catch(SQLException se){
 		      //Handle errors for JDBC
 		      se.printStackTrace();
 		      //JOptionPane.showMessageDialog(null, Integer.toString(queryRes));
 		      textAreaLOG.setText(textAreaLOG.getText()+ "\n"+ se.getErrorCode() + "\n"+  se.getMessage());
+		      la.PrintLog(String.valueOf(se.getErrorCode()) ,"SQLException;"+se.getMessage());
+		      
 		   }catch(Exception e){
 		      //Handle errors for Class.forName
 			   textAreaLOG.setText(e.getMessage());
+			   la.PrintLog("12" ,"Exception;"+e.getMessage());
 		      e.printStackTrace();
 		   }finally{
 		      //finally block used to close resources
@@ -673,45 +703,6 @@ public class MAIN extends JFrame {
 		   System.out.println("Goodbye!");	
 	}
 	
-	public String VerificaDriver(){
-		String driverJdbc = tFdriver.getText();
-		try
-		{
-			Class.forName(driverJdbc);
-			return "VerificaDriver_OK";
-		}
-		catch (ClassNotFoundException e) 
-		{
-		    // gestione dell'eccezione
-			// eccezione possibile se non inserito file jar Connector,eclipse lo inserisce nel bin
-			// oppure non inserito nella jdk,non installato il driver
-			
-			System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(null,"Driver "+ driverJdbc +" non presente");
-			return "VerificaDriver_KO";
-		}
-		
 	
-	}
-
-public String ConnettiDb(){
-		
-		String connectionString = tFconnectionString.getText() ;
-		Connection connection = null;
-		
-		try {
-			connection = DriverManager.getConnection(connectionString);
-			return "ConnettiDb_OK";
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-			//Non gestisce utente non valido
-			System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(null,"non connesso ("+connectionString +") - " + e.getMessage());
-			return "ConnettiDb_KO";
-			
-		} 
-		
-	}
 }
 
