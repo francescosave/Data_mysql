@@ -332,6 +332,7 @@ public class MAIN extends JFrame {
 		panel.add(button_11);
 		
 		button_12 = new JButton("CREATE TABLE");
+		button_12.setToolTipText("ALIQUOTE_IVA");
 		button_12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textAreaSQL.setText("CREATE TABLE ALIQUOTE_IVA \n" + 
@@ -601,6 +602,7 @@ public class MAIN extends JFrame {
 		panel.add(button_15);
 		
 		button_16 = new JButton("CREATE TABLE");
+		button_16.setToolTipText("MOVIMENTI");
 		button_16.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -619,6 +621,7 @@ public class MAIN extends JFrame {
 		panel.add(button_16);
 		
 		button_17 = new JButton("CREATE TABLE");
+		button_17.setToolTipText("MOVIMENTI_RIGHE");
 		button_17.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textAreaSQL.setText("CREATE TABLE MOVIMENTI_RIGHE \n" + 
@@ -635,6 +638,7 @@ public class MAIN extends JFrame {
 		panel.add(button_17);
 		
 		button_18 = new JButton("CREATE TABLE");
+		button_18.setToolTipText("CLIENTI");
 		button_18.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textAreaSQL.setText("CREATE TABLE CLIENTI \n" + 
