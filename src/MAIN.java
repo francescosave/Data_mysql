@@ -29,6 +29,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JCheckBox;
+import javax.swing.JProgressBar;
 
 public class MAIN extends JFrame {
 
@@ -83,7 +84,15 @@ public class MAIN extends JFrame {
 	private JButton button_18;
 	private JCheckBox chckbxEseguiAutomaticamente;
 	private JButton btnNewButton_1;
+	private JButton button_19;
+	private JButton btnNewButton_3;
+	private JButton button_20;
+	private JButton button_21;
+	private JButton btnNewButton_4;
 
+	String[] parts;
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -120,7 +129,7 @@ public class MAIN extends JFrame {
 		toolBar.add(lblDriver);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 1265, 646);
+		panel.setBounds(0, -13, 1265, 690);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -136,7 +145,7 @@ public class MAIN extends JFrame {
 		panel.add(button_1);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(21, 21, 405, 189);
+		scrollPane.setBounds(21, 21, 1216, 189);
 		panel.add(scrollPane);
 		
 		textAreaSQL = new JTextArea();
@@ -144,7 +153,7 @@ public class MAIN extends JFrame {
 		textAreaSQL.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
 		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(444, 512, 803, 102);
+		scrollPane_1.setBounds(440, 579, 803, 102);
 		panel.add(scrollPane_1);
 		
 		textAreaLOG = new JTextArea();
@@ -158,7 +167,7 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		button_2.setBounds(558, 64, 98, 30);
+		button_2.setBounds(558, 224, 98, 30);
 		panel.add(button_2);
 		
 		btnArticoli = new JButton("CREATE");
@@ -179,7 +188,7 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		btnArticoli.setBounds(659, 64, 93, 30);
+		btnArticoli.setBounds(659, 224, 93, 30);
 		panel.add(btnArticoli);
 		
 		button_4 = new JButton("INSERT RECORD");
@@ -193,7 +202,7 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		button_4.setBounds(867, 64, 116, 30);
+		button_4.setBounds(867, 224, 116, 30);
 		panel.add(button_4);
 		
 		button_5 = new JButton("DROP TABLE");
@@ -203,7 +212,7 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		button_5.setBounds(558, 107, 98, 30);
+		button_5.setBounds(558, 267, 98, 30);
 		panel.add(button_5);
 		
 		button_6 = new JButton("CREATE TABLE");
@@ -218,7 +227,7 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		button_6.setBounds(659, 107, 93, 30);
+		button_6.setBounds(659, 267, 93, 30);
 		panel.add(button_6);
 		
 		button_7 = new JButton("INSERT RECORD");
@@ -232,7 +241,7 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		button_7.setBounds(867, 107, 116, 30);
+		button_7.setBounds(867, 267, 116, 30);
 		panel.add(button_7);
 		
 		button_8 = new JButton("DROP TABLE");
@@ -242,7 +251,7 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		button_8.setBounds(558, 150, 98, 30);
+		button_8.setBounds(558, 310, 98, 30);
 		panel.add(button_8);
 		
 		button_9 = new JButton("CREATE TABLE");
@@ -257,7 +266,7 @@ public class MAIN extends JFrame {
 				
 			}
 		});
-		button_9.setBounds(659, 150, 93, 30);
+		button_9.setBounds(659, 310, 93, 30);
 		panel.add(button_9);
 		
 		button_10 = new JButton("INSERT RECORD");
@@ -270,7 +279,7 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		button_10.setBounds(867, 150, 116, 30);
+		button_10.setBounds(867, 310, 116, 30);
 		panel.add(button_10);
 		
 		button_11 = new JButton("DROP TABLE");
@@ -280,7 +289,7 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		button_11.setBounds(558, 193, 98, 30);
+		button_11.setBounds(558, 353, 98, 30);
 		panel.add(button_11);
 		
 		button_12 = new JButton("CREATE TABLE");
@@ -294,7 +303,7 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		button_12.setBounds(659, 193, 93, 30);
+		button_12.setBounds(659, 353, 93, 30);
 		panel.add(button_12);
 		
 		button_13 = new JButton("INSERT RECORD");
@@ -309,12 +318,12 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		button_13.setBounds(867, 193, 116, 30);
+		button_13.setBounds(867, 353, 116, 30);
 		panel.add(button_13);
 		
 		JLabel lblNewLabel = new JLabel("ARTICOLI");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel.setBounds(440, 62, 108, 32);
+		lblNewLabel.setBounds(440, 222, 108, 32);
 		panel.add(lblNewLabel);
 		
 		JButton btnNewButton_2 = new JButton("ALTER TAB.");
@@ -329,11 +338,11 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		btnNewButton_2.setBounds(755, 66, 89, 27);
+		btnNewButton_2.setBounds(755, 226, 89, 27);
 		panel.add(btnNewButton_2);
 		
 		tFdriver = new JTextField();
-		tFdriver.setBounds(21, 514, 304, 30);
+		tFdriver.setBounds(10, 579, 304, 30);
 		panel.add(tFdriver);
 		tFdriver.setText("com.mysql.jdbc.Driver");
 		tFdriver.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -346,7 +355,7 @@ public class MAIN extends JFrame {
 		tFdriver.setColumns(10);
 		
 		tFserver = new JTextField();
-		tFserver.setBounds(62, 547, 122, 30);
+		tFserver.setBounds(51, 612, 122, 30);
 		panel.add(tFserver);
 		tFserver.setText("localhost");
 		tFserver.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -359,7 +368,7 @@ public class MAIN extends JFrame {
 		tFserver.setColumns(10);
 		
 		tFport = new JTextField();
-		tFport.setBounds(21, 547, 40, 30);
+		tFport.setBounds(10, 612, 40, 30);
 		panel.add(tFport);
 		tFport.setText("3306");
 		tFport.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -372,7 +381,7 @@ public class MAIN extends JFrame {
 		tFport.setColumns(10);
 		
 		tFdatabase = new JTextField();
-		tFdatabase.setBounds(188, 547, 135, 30);
+		tFdatabase.setBounds(177, 612, 135, 30);
 		panel.add(tFdatabase);
 		tFdatabase.setText("retasys");
 		tFdatabase.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -385,14 +394,14 @@ public class MAIN extends JFrame {
 		tFdatabase.setColumns(10);
 		
 		tFuser = new JTextField();
-		tFuser.setBounds(335, 547, 81, 30);
+		tFuser.setBounds(325, 613, 81, 30);
 		panel.add(tFuser);
 		tFuser.setText("root");
 		tFuser.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tFuser.setColumns(10);
 		
 		tFconnectionString = new JTextField();
-		tFconnectionString.setBounds(21, 579, 304, 35);
+		tFconnectionString.setBounds(10, 644, 304, 35);
 		panel.add(tFconnectionString);
 		tFconnectionString.addFocusListener(new FocusAdapter() {
 			@Override
@@ -405,12 +414,12 @@ public class MAIN extends JFrame {
 		tFconnectionString.setText("jdbc:mysql://"+tFserver.getText()+":"+tFport.getText()+"/"+tFdatabase.getText()+"?user="+tFuser.getText());
 		
 		btnNewButton = new JButton("TEST");
-		btnNewButton.setBounds(334, 513, 81, 30);
+		btnNewButton.setBounds(324, 579, 81, 30);
 		panel.add(btnNewButton);
 		btnNewButton.setForeground(Color.BLACK);
 		
 		button = new JButton("TEST");
-		button.setBounds(335, 583, 81, 30);
+		button.setBounds(325, 649, 81, 30);
 		panel.add(button);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -438,7 +447,7 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		btnUpdateRecord_1.setBounds(993, 64, 116, 30);
+		btnUpdateRecord_1.setBounds(993, 224, 116, 30);
 		panel.add(btnUpdateRecord_1);
 		
 		btnUpdateRecord_2 = new JButton("UPDATE RECORD");
@@ -448,7 +457,7 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		btnUpdateRecord_2.setBounds(993, 107, 116, 30);
+		btnUpdateRecord_2.setBounds(993, 267, 116, 30);
 		panel.add(btnUpdateRecord_2);
 		
 		btnUpdateRecord_3 = new JButton("UPDATE RECORD");
@@ -457,16 +466,17 @@ public class MAIN extends JFrame {
 			}
 		});
 		btnUpdateRecord_3.setEnabled(false);
-		btnUpdateRecord_3.setBounds(993, 150, 116, 30);
+		btnUpdateRecord_3.setBounds(993, 310, 116, 30);
 		panel.add(btnUpdateRecord_3);
 		
 		btnUpdateRecord_4 = new JButton("UPDATE RECORD");
 		btnUpdateRecord_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		btnUpdateRecord_4.setEnabled(false);
-		btnUpdateRecord_4.setBounds(993, 193, 116, 30);
+		btnUpdateRecord_4.setBounds(993, 353, 116, 30);
 		panel.add(btnUpdateRecord_4);
 		
 		btnDeleteRecord_1 = new JButton("DELETE RECORD");
@@ -476,7 +486,7 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		btnDeleteRecord_1.setBounds(1121, 64, 116, 30);
+		btnDeleteRecord_1.setBounds(1121, 224, 116, 30);
 		panel.add(btnDeleteRecord_1);
 		
 		btnDeleteRecord_2 = new JButton("DELETE RECORD");
@@ -486,7 +496,7 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		btnDeleteRecord_2.setBounds(1119, 107, 116, 30);
+		btnDeleteRecord_2.setBounds(1119, 267, 116, 30);
 		panel.add(btnDeleteRecord_2);
 		
 		btnDeleteRecord_3 = new JButton("DELETE RECORD");
@@ -496,7 +506,7 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		btnDeleteRecord_3.setBounds(1121, 150, 116, 30);
+		btnDeleteRecord_3.setBounds(1121, 310, 116, 30);
 		panel.add(btnDeleteRecord_3);
 		
 		btnDeleteRecord_4 = new JButton("DELETE RECORD");
@@ -506,7 +516,7 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		btnDeleteRecord_4.setBounds(1121, 193, 116, 30);
+		btnDeleteRecord_4.setBounds(1121, 353, 116, 30);
 		panel.add(btnDeleteRecord_4);
 		
 		JButton button_3 = new JButton("DROP TABLE");
@@ -517,7 +527,7 @@ public class MAIN extends JFrame {
 				
 			}
 		});
-		button_3.setBounds(558, 234, 98, 30);
+		button_3.setBounds(558, 394, 98, 30);
 		panel.add(button_3);
 		
 		JButton button_14 = new JButton("DROP TABLE");
@@ -527,7 +537,7 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		button_14.setBounds(558, 275, 98, 30);
+		button_14.setBounds(558, 472, 98, 30);
 		panel.add(button_14);
 		
 		JButton button_15 = new JButton("DROP TABLE");
@@ -537,7 +547,7 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		button_15.setBounds(558, 316, 98, 30);
+		button_15.setBounds(558, 435, 98, 27);
 		panel.add(button_15);
 		
 		button_16 = new JButton("CREATE TABLE");
@@ -556,7 +566,7 @@ public class MAIN extends JFrame {
 				
 			}
 		});
-		button_16.setBounds(659, 234, 93, 30);
+		button_16.setBounds(659, 394, 93, 30);
 		panel.add(button_16);
 		
 		button_17 = new JButton("CREATE TABLE");
@@ -573,7 +583,7 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		button_17.setBounds(659, 275, 93, 30);
+		button_17.setBounds(659, 435, 93, 30);
 		panel.add(button_17);
 		
 		button_18 = new JButton("CREATE TABLE");
@@ -588,7 +598,7 @@ public class MAIN extends JFrame {
 				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
 			}
 		});
-		button_18.setBounds(659, 316, 93, 30);
+		button_18.setBounds(659, 472, 93, 30);
 		panel.add(button_18);
 		
 		chckbxEseguiAutomaticamente = new JCheckBox("Esegui Automaticamente");
@@ -596,27 +606,134 @@ public class MAIN extends JFrame {
 		chckbxEseguiAutomaticamente.setBounds(268, 225, 158, 23);
 		panel.add(chckbxEseguiAutomaticamente);
 		
-		btnNewButton_1 = new JButton("New button");
+		btnNewButton_1 = new JButton("carica setup.sql");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				FileSql fs= new FileSql();
-				textAreaSQL.setText(fs.getFile());
+				
+				String querys_sql = null;
+				
+				//querys_sql= fs.getFile("D:\\HD_EXT_COPIA\\SORGENTI\\Data_mysql\\sql\\setup.sql");
+				//textAreaSQL.setText(fs.getFile());
+				
+				parts =  fs.getFile("D:\\HD_EXT_COPIA\\SORGENTI\\Data_mysql\\sql\\setup.sql");
+				int conta =0;
+				for(conta=0;conta<parts.length;conta++){
+					//JOptionPane.showMessageDialog(null, parts[conta]);
+					textAreaSQL.setText(textAreaSQL.getText()+ parts[conta]+"\n");
+				}
+				
 				
 				LogApp la = new LogApp();
 				la.PrintLog("11","JButton.actionPerformed");
 				
 			}
 		});
-		btnNewButton_1.setBounds(31, 228, 89, 23);
+		btnNewButton_1.setBounds(21, 342, 135, 23);
 		panel.add(btnNewButton_1);
+		
+		button_19 = new JButton("DROP TABLE");
+		button_19.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textAreaSQL.setText("DROP TABLE IMPOSTAZIONE_TASTI;");
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+			}
+		});
+		button_19.setBounds(558, 513, 98, 30);
+		panel.add(button_19);
+		
+		btnNewButton_3 = new JButton("CREATE");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textAreaSQL.setText("CREATE TABLE IMPOSTAZIONE_TASTI \n" + 
+		                   "(PAGINA INTEGER NOT NULL, \n" +
+		                   "RIGA INTEGER NOT NULL, \n" + 
+		                   "COLONNA1 VARCHAR(15), \n" +
+		                   "COLONNA2 VARCHAR(15), \n" +
+		                   "COLONNA3 VARCHAR(15), \n" +
+		                   "COLONNA4 VARCHAR(15), \n" +
+		                   "COLONNA5 VARCHAR(15), \n" +
+						   "PRIMARY KEY (PAGINA,RIGA));\n"); 
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+			}
+		});
+		btnNewButton_3.setBounds(663, 513, 89, 30);
+		panel.add(btnNewButton_3);
+		
+		button_20 = new JButton("INSERT RECORD");
+		button_20.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				int pagina=0;
+				
+				for(pagina=1;pagina<=50;pagina++){
+					int riga=0;
+					for(riga=1;riga<=10;riga++){
+						//JOptionPane.showMessageDialog(null, i);
+						textAreaSQL.setText("INSERT INTO IMPOSTAZIONE_TASTI\n" +  
+								"(PAGINA,RIGA,COLONNA1,COLONNA2,COLONNA3,COLONNA4,COLONNA5)\n" + 
+								"VALUES\n" + 
+								"("+ pagina +","+ riga + ",'-','-','-','-','-');\n");
+						if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+					}
+					
+					
+				}
+					
+					
+				
+				
+				
+			}
+		});
+		button_20.setBounds(867, 513, 116, 30);
+		panel.add(button_20);
+		
+		JProgressBar progressBar = new JProgressBar();
+		progressBar.setBounds(867, 554, 116, 14);
+		panel.add(progressBar);
+		
+		button_21 = new JButton("DELETE RECORD");
+		button_21.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textAreaSQL.setText("DELETE FROM IMPOSTAZIONE_TASTI;");
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+			}
+		});
+		button_21.setBounds(1121, 513, 116, 30);
+		panel.add(button_21);
+		
+		btnNewButton_4 = new JButton("New button");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textAreaSQL.setText("UPDATE IMPOSTAZIONE_TASTI SET COLONNA1 = 'CAFFE' WHERE PAGINA=1 AND RIGA=1;");
+				if (chckbxEseguiAutomaticamente.isSelected() ) ExecuteStatement();
+			}
+		});
+		btnNewButton_4.setBounds(993, 513, 89, 23);
+		panel.add(btnNewButton_4);
+		
+		JButton btnExecuteBatch = new JButton("EXECUTE BATCH");
+		btnExecuteBatch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				MysqlUtil mu = new MysqlUtil();
+				textAreaLOG.setText(mu.ExecuteStatmentBatch(tFdriver.getText(), tFconnectionString.getText(),parts));
+				
+			}
+		});
+		btnExecuteBatch.setForeground(Color.BLACK);
+		btnExecuteBatch.setBounds(169, 338, 185, 30);
+		panel.add(btnExecuteBatch);
 		
 		JLabel lblNewLabel_1 = new JLabel("ATTENZIONE QUESTO TOOL MODIFICA IRRIMEDIALMENTE IL DATABASE.ESGUIRE UN BACKUP PRIMA DI ESEGUIRE QUALSIASI OPERAZIONE");
 		lblNewLabel_1.setForeground(Color.YELLOW);
 		lblNewLabel_1.setOpaque(true);
 		lblNewLabel_1.setBackground(Color.RED);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel_1.setBounds(10, 666, 1233, 30);
+		lblNewLabel_1.setBounds(10, 688, 1233, 30);
 		contentPane.add(lblNewLabel_1);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -644,7 +761,7 @@ public class MAIN extends JFrame {
 		   int queryRes=0;
 		   
 		   LogApp la = new LogApp();
-			//la.PrintLog("11","JButton.actionPerformed");
+		   
 		   
 		   try{
 		      //STEP 2: Register JDBC driver
@@ -702,7 +819,5 @@ public class MAIN extends JFrame {
 		  
 		   System.out.println("Goodbye!");	
 	}
-	
-	
 }
 

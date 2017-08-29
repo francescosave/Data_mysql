@@ -2,10 +2,12 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Map;
 import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
+
 
 
 public class MysqlUtil {
@@ -15,9 +17,13 @@ public class MysqlUtil {
 	String COMANDOSQL_DROP_ARTICOLI = "";
 	String COMANDOSQL_CREATE_ARTICOLI = "";
 	
+	
+	
+	
+	
 	public void Initialize_QueryList(){
 		
-		
+				
 		map.put("DROP_ARTICOLI", "Mario");
 		map.put("CREATE_ARTICOLI", "Rossi");
 		map.put("ALTER_ARTICOLI", "Rossi");
@@ -98,7 +104,6 @@ public class MysqlUtil {
 		
 	}
 	
-	
 	public String ConnettiDb(){
 		
 		String connectionString = "jdbc:mysql://localhost:3306/test?user=root";
@@ -118,19 +123,148 @@ public class MysqlUtil {
 		
 	}
 	
+	public String ExecuteStatment(String driver,String connString,String querySql){
+		// TODO Auto-generated method stub
+		Connection conn = null;
+		Statement stmt = null;
+		int queryRes=0;
+		 
+		LogApp la = new LogApp();
+			
+		   
+		   try{
+		      //STEP 2: Register JDBC driver
+		      Class.forName(driver);
+
+		      //STEP 3: Open a connection
+		      la.PrintLog("STEP", "Connecting to a selected database...");
+		      conn = DriverManager.getConnection(connString, "root", null);
+		      la.PrintLog("STEP", "Connected database successfully...");
+		      
+		      //STEP 4: Execute a query
+		      la.PrintLog("STEP", "Creating table in given database...");
+		      stmt = conn.createStatement();
+		      
+		      queryRes = stmt.executeUpdate(querySql);
+		      //JOptionPane.showMessageDialog(null,"succ " + queryRes );
+		     
+		     
+		      
+		      la.PrintLog("STEP", "Created table in given database...");
+		     
+		      la.PrintLog("QueryOK",querySql.substring(0, 15)+"...");
+		     
+		       return "comando eseguito con successo!!!\n";
+		      
+		   }catch(SQLException se){
+		      //Handle errors for JDBC
+		      se.printStackTrace();
+		      //JOptionPane.showMessageDialog(null, Integer.toString(queryRes));
+		      la.PrintLog(String.valueOf(se.getErrorCode()) ,"SQLException;"+se.getMessage());
+		      return "\n"+ se.getErrorCode() + "\n"+  se.getMessage();
+		      
+		      
+		   }catch(Exception e){
+		      //Handle errors for Class.forName
+			   
+			   la.PrintLog("12" ,"Exception;"+e.getMessage());
+		      e.printStackTrace();
+		      return e.getMessage();
+		   }finally{
+		      //finally block used to close resources
+		      try{
+		         if(stmt!=null)
+		            conn.close();
+		      }catch(SQLException se){
+		    	  return se.getMessage();
+		      }// do nothing
+		      try{
+		         if(conn!=null)
+		            conn.close();
+		      }catch(SQLException se){
+		    	 
+		         se.printStackTrace();
+		         return se.getMessage();
+		      }//end finally try
+		   }//end try
+		  
+		   //la.PrintLog("STEP", "Goodbye!");	
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public String ExecuteStatmentBatch(String driver,String connString,String querySql[]){
+		// TODO Auto-generated method stub
+				Connection conn = null;
+				Statement stmt = null;
+				int queryRes=0;
+				 
+				LogApp la = new LogApp();
+					
+				   
+				   try{
+				      //STEP 2: Register JDBC driver
+				      Class.forName(driver);
+
+				      //STEP 3: Open a connection
+				      la.PrintLog("STEP", "Connecting to a selected database...");
+				      conn = DriverManager.getConnection(connString, "root", null);
+				      la.PrintLog("STEP", "Connected database successfully...");
+				      
+				      //STEP 4: Execute a query
+				      la.PrintLog("STEP", "Creating table in given database...");
+				      stmt = conn.createStatement();
+				      
+				      
+				      JOptionPane.showMessageDialog(null, querySql.length);
+				      int conta =0;
+				      for(conta=0;conta<querySql.length;conta++){
+				    	  queryRes = stmt.executeUpdate(querySql[conta]);
+				    	  la.PrintLog("QueryOK",querySql[conta].substring(0, 15)+"...");
+				      }
+				      
+				     
+				     
+				     
+				      
+				      
+				     
+				     
+				     
+				       return "comando eseguito con successo!!!\n";
+				      
+				   }catch(SQLException se){
+				      //Handle errors for JDBC
+				      se.printStackTrace();
+				      //JOptionPane.showMessageDialog(null, Integer.toString(queryRes));
+				      la.PrintLog(String.valueOf(se.getErrorCode()) ,"SQLException;"+se.getMessage());
+				      return "\n"+ se.getErrorCode() + "\n"+  se.getMessage();
+				      
+				      
+				   }catch(Exception e){
+				      //Handle errors for Class.forName
+					   
+					   la.PrintLog("12" ,"Exception;"+e.getMessage());
+				      e.printStackTrace();
+				      return e.getMessage();
+				   }finally{
+				      //finally block used to close resources
+				      try{
+				         if(stmt!=null)
+				            conn.close();
+				      }catch(SQLException se){
+				    	  return se.getMessage();
+				      }// do nothing
+				      try{
+				         if(conn!=null)
+				            conn.close();
+				      }catch(SQLException se){
+				    	 
+				         se.printStackTrace();
+				         return se.getMessage();
+				      }//end finally try
+				   }//end try
+				  
+				   //la.PrintLog("STEP", "Goodbye!");	
+	}
 	
 	
 	

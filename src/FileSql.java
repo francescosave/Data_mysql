@@ -7,12 +7,12 @@ import javax.swing.JOptionPane;
 
 public class FileSql {
 
-	public String getFile(){
+	public String[] getFile(String nomefile){
 		
 		 // definiamo il percorso al file da leggere
 		FileReader doc = null;
 		try {
-			 doc = new FileReader("D:\\HD_EXT_COPIA\\SORGENTI\\Data_mysql\\sql\\setup.sql");
+			 doc = new FileReader(nomefile);
 			 String i;
 			 String Query_All="";
 		      // apriamo lo stream di input...
@@ -23,14 +23,14 @@ public class FileSql {
 		        i=br.readLine();
 		       if (i!=null)
 		    	   {
-		    	   	System.out.println(i);
+		    	   	//System.out.println(i);
 		    	   	Query_All += i;
 		    	   }
 		      }
 		      while (i!=null);
 		      String[] Query = Query_All.split(";");
-		      JOptionPane.showMessageDialog(null, Query[1]);
-		      return Query_All;
+		      
+		      return Query;
 		      
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
